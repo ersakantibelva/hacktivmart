@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Beverages"
+    },
+    {
+        "id": 2,
+        "name": "Bread/Bakery"
+    },
+    {
+        "id": 3,
+        "name": "Canned/Jarred Goods"
+    },
+    {
+        "id": 4,
+        "name": "Dairy"
+    },
+    {
+        "id": 5,
+        "name": "Dry/Baking Goods"
+    },
+    {
+        "id": 6,
+        "name": "Frozen Foods"
+    },
+    {
+        "id": 7,
+        "name": "Meat"
+    },
+    {
+        "id": 8,
+        "name": "Produce"
+    },
+    {
+        "id": 9,
+        "name": "Cleaners"
+    },
+    {
+        "id": 10,
+        "name": "Paper Goods"
+    },
+    {
+        "id": 11,
+        "name": "Personal Care"
+    },
+    {
+        "id": 12,
+        "name": "Other"
+    }
+]
