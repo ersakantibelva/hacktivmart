@@ -63,7 +63,7 @@ class OrderController {
         const { OrderId, ProductId } = req.params
 
         Product.increment({ stock: 1 }, { where: { id: ProductId } })
-        .then(product => {
+        .then(_ => {
             return Transaction.destroy({ where: { OrderId, ProductId } })
         })
         .then(_ => {
