@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Profile | HacktivMart</title>
+</head>
+<body>
+    
+    <%- include('partials/navbar', { user }) %>
+
+    
+<div class="p-4 items-center mx-0">
+    <div class="text-center mb-4 opacity-90">
+        <a href="#" class="block relative">
+            <img alt="profil" src="https://picsum.photos/200/300" class="mx-auto object-cover rounded-full h-40 w-40 "/>
+        </a>
+    </div>
+    <div class="text-center">
+        <p class="text-2xl text-gray-800">
+            <%= user.Profile.title %> <%= user.Profile.firstName %> <%= user.Profile.lastName %>
+        </p>
+        <p class="text-xl text-gray-500 font-light">
+            Date of Birth: <%= user.Profile.formattedDateOfBirth %>
+        </p>
+    </div>
+</div>
+
+<div class="container mx-auto px-4 sm:px-8 max-w-6xl">
+    <div class="py-8">
+
+<% if (user.role == 'buyer' && orders) { %>
+    <h2 class="text-2xl text-center font-semibold leading-tight">
+        Your Order's History
+    </h2>
+<div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+    <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+        <table class="min-w-full leading-normal">
+            <thead>
+                <tr>
+                    <th scope="col"
+                        class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                        No
+                    </th>
+                    <th scope="col"
+                        class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                        Order Code
+                    </th>
+                    <th scope="col"
+                        class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                        Ordered Date
+                    </th>
+                    <th scope="col"
+                        class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                        
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach((el, index) => { %>
+                <tr>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <div class="ml-3">
+                                <p class="text-gray-900 whitespace-no-wrap">
+                                    <%= ++index %>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap">
+                            <%= el.code %>
+                        </p>
+                    </td>
+
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap">
+                            <%= el.updatedAt %>
+                        </p>
+                    </td>
+
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <a href="/orders/receipt/<%= el.id %>" target="_blank" class="text-indigo-600 hover:text-indigo-900">
+                            See Receipt
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+</div>
+<% } %>
+</div>
+</div>
+</div>
+
+</body>
+</html>

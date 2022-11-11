@@ -73,7 +73,8 @@
         "id": 11,
         "name": "Bread Foccacia Whole",
         "price": 40000,
-        "stock": 2
+        "stock": 2,
+        "CategoryId": 2
     },
     {
         "id": 12,

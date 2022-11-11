@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Home | HacktivMart</title>
+</head>
+
+<body>
+
+    <div>
+
+        <%- include('partials/navbar', { user }) %>
+
+            <div class="container mx-auto px-4 sm:px-8 max-w-6xl">
+                <div class="py-8">
+                    <% if(!order) { %>
+                        <div class="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                            <h2 class="text-2xl font-semibold leading-tight">
+                                You don't have any items in cart.
+                            </h2>
+                        </div> 
+                    <% } else if (order) { %>
+                    <!-- Search and Filter -->
+                    <div class="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                        <h2 class="text-2xl font-semibold leading-tight">
+                            Product List
+                        </h2>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                        <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                            <table class="min-w-full leading-normal">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                            No
+                                        </th>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                            Product
+                                        </th>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                            Price
+                                        </th>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                            Qty
+                                        </th>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                            Total
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% order.Products.forEach((el, index) => { %>
+                                    <tr>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                <div class="ml-3">
+                                                    <p class="text-gray-900 whitespace-no-wrap">
+                                                        <%= ++index %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p class="text-gray-900 whitespace-no-wrap">
+                                                <%= el.name %>
+                                            </p>
+                                        </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p class="text-gray-900 whitespace-no-wrap">
+                                                <%= formatRupiah(el.price) %>
+                                            </p>
+                                        </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p class="text-gray-900 whitespace-no-wrap">
+                                                <%= el.Transaction.quantity %>
+                                            </p>
+                                        </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p class="text-gray-900 whitespace-no-wrap">
+                                                <%= formatRupiah(el.Transaction.totalPrice) %>
+                                            </p>
+                                        </td>
+                                        <!-- <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold">
+                                            <a href="/products//buy" class="text-indigo-600 hover:text-indigo-900">
+                                                +
+                                            </a>
+                                            <a href="/products//restock" class="text-indigo-600 hover:text-indigo-900">
+                                                -
+                                            </a>
+                                        </td> -->
+                                    </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                        <h2 class="text-2xl font-semibold leading-tight">
+                            Total: <%= formatRupiah(totalCost) %>
+                        </h2>
+                        <div class=" flex flex-row gap-4 text-end">
+                                <button
+                                    class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+                                    >
+                                    <a href="/orders/checkout/<%= order.id %>">Checkout</a>
+                                </button>
+                        </div>
+                    </div>
+                    <% } %>
+
+                </div>
+            </div>
+
+    </div>
+
+</body>
+
+</html>

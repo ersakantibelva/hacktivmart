@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "HacktivMart-DB",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}

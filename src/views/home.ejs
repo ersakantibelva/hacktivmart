@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Home | HacktivMart</title>
+</head>
+
+<body>
+
+    <div>
+
+        <%- include('partials/navbar', { user }) %>
+
+        <% if (success) { %>
+            <div class="container mx-auto px-4 sm:px-8 max-w-6xl py-8 text-center">
+                <h2 class="text-2xl font-semibold leading-tight text-green-900">
+                    <%= success %>
+                </h2>
+            </div>
+        <% } else if (error) { %>
+            <div class="container mx-auto px-4 sm:px-8 max-w-6xl py-8 text-center">
+                <h2 class="text-xl font-semibold leading-tight text-red-600">
+                    <%= error %>
+                </h2>
+            </div>
+        <% } %>
+
+            <div class="container mx-auto px-4 sm:px-8 max-w-6xl">
+                <div class="py-8">
+                    <!-- Search and Filter -->
+                    <div class="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                        <h2 class="text-2xl font-semibold leading-tight">
+                            Product List
+                        </h2>
+
+                        <div class=" flex flex-row gap-4 text-end">
+                            <!-- Filter -->
+                            <form action="/products" method="get"
+                                class="flex flex-col md:flex-row w-3/4 md:w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center">
+                                <div class=" relative items-center">
+                                    <select
+                                        class="block w-52 py-2 px-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                                        name="filter">
+                                        <option selected value="">
+                                            Select Category
+                                        </option>
+                                        <% categories.forEach(el=> { %>
+                                            <option value="<%= el.id %>">
+                                                <%= el.name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <button
+                                    class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+                                    type="submit">
+                                    Filter
+                                </button>
+                            </form>
+
+                            <form action="/products" method="get"
+                                class="flex flex-col md:flex-row w-3/4 md:w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center">
+                                <div class=" relative ">
+                                    <input type="text"
+                                        class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                        name="search" placeholder="search" />
+                                </div>
+                                <button
+                                    class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+                                    type="submit">
+                                    Search
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                        <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                            <table class="min-w-full leading-normal">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                            Product
+                                        </th>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                            Category
+                                        </th>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                            Price
+                                        </th>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                            Stock
+                                        </th>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% products.forEach(el => { %>
+                                    <tr>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                <div class="ml-3">
+                                                    <p class="text-gray-900 whitespace-no-wrap">
+                                                        <%= el.name %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p class="text-gray-900 whitespace-no-wrap">
+                                                <%= el.Category.name %>
+                                            </p>
+                                        </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p class="text-gray-900 whitespace-no-wrap">
+                                                <%= formatRupiah(el.price) %>
+                                            </p>
+                                        </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <span
+                                                class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                                <span aria-hidden="true"
+                                                    class="absolute inset-0 bg-green-200 opacity-50 rounded-full">
+                                                </span>
+                                                <span class="relative">
+                                                    <%= el.stock %>
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <% if (user && user.role == 'buyer') { %>
+                                            <a href="/products/<%= el.id %>/buy" class="text-indigo-600 hover:text-indigo-900">
+                                                Buy
+                                            </a>
+                                            <% } else if (user && user.role == 'seller') { %>
+                                            <a href="/products/<%= el.id %>/restock" class="text-indigo-600 hover:text-indigo-900">
+                                                Restock
+                                            </a>
+                                            <% } %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+</body>
+
+</html>
