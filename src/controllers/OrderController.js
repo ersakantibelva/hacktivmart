@@ -1,5 +1,6 @@
 const { Order, Product, User, Profile, Transaction } = require('../models')
 const { formatRupiah, formatReceipt } = require('../helper/formatters')
+const { response } = require('express')
 
 class OrderController {
     static showCurrentOrder(req, res) {
@@ -24,7 +25,6 @@ class OrderController {
                     totalCost += el.Transaction.totalPrice
                 })
             }
-
             res.render('cart', { user, order, totalCost, formatRupiah })
         })
         .catch(err => {
@@ -53,6 +53,21 @@ class OrderController {
         .then(order => {
             const receipt = formatReceipt(order)
             res.render('receipt', { receipt })
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+
+    static deleteTransaction(req, res) {
+        const { OrderId, ProductId } = req.params
+
+        Product.increment({ stock: 1 }, { where: { id: ProductId } })
+        .then(product => {
+            return Transaction.destroy({ where: { OrderId, ProductId } })
+        })
+        .then(_ => {
+            res.redirect('/cart')
         })
         .catch(err => {
             res.send(err)

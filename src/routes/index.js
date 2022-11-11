@@ -16,6 +16,7 @@ router.get('/profile/:ProfileId', MainController.showProfile)
 router.get('/cart', OrderController.showCurrentOrder)
 router.get('/orders/checkout/:OrderId', OrderController.checkoutCart)
 router.get('/orders/receipt/:OrderId', OrderController.showReceipt)
+router.get('/orders/:OrderId/products/:ProductId/delete', OrderController.deleteTransaction)
 router.get('/products/:ProductId/buy', ProductController.buyProduct)
 router.get('/products/:ProductId/restock', ProductController.restockProduct)
 

@@ -57,6 +57,10 @@
                                             class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
                                             Total
                                         </th>
+                                        <th scope="col"
+                                            class="font-semibold px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase">
+                                            
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,14 +94,11 @@
                                                 <%= formatRupiah(el.Transaction.totalPrice) %>
                                             </p>
                                         </td>
-                                        <!-- <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold">
-                                            <a href="/products//buy" class="text-indigo-600 hover:text-indigo-900">
-                                                +
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold">
+                                            <a href="/orders/<%= el.Transaction.OrderId %>/products/<%= el.Transaction.ProductId %>/delete" class="text-indigo-600 hover:text-indigo-900">
+                                                Remove Items
                                             </a>
-                                            <a href="/products//restock" class="text-indigo-600 hover:text-indigo-900">
-                                                -
-                                            </a>
-                                        </td> -->
+                                        </td>
                                     </tr>
                                     <% }) %>
                                 </tbody>
